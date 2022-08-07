@@ -1,0 +1,131 @@
+{
+    "Comment": "Workflow execute when new roofer created",
+    "StartAt": "AddLeadToDynamo",
+    "States": {
+        "AddLeadToDynamo": {
+            "Type": "Task",
+            "Resource": "arn:aws:lambda:us-east-1:906360379090:function:lead-ingestion-notification-workflow-dev-add_lead_dynamo",
+            "Retry": [
+                {
+                    "ErrorEquals": ["CustomError"],
+                    "IntervalSeconds": 1,
+                    "MaxAttempts": 2,
+                    "BackoffRate": 2.0
+                },
+                {
+                    "ErrorEquals": ["States.TaskFailed"],
+                    "IntervalSeconds": 30,
+                    "MaxAttempts": 2,
+                    "BackoffRate": 2.0
+                },
+                {
+                    "ErrorEquals": ["States.ALL"],
+                    "IntervalSeconds": 5,
+                    "MaxAttempts": 5,
+                    "BackoffRate": 2.0
+                }
+            ],
+            "Next": "CreateLeadProduct"
+        },
+        "CreateLeadProduct": {
+            "Type": "Task",
+            "Resource": "arn:aws:lambda:us-east-1:906360379090:function:lead-ingestion-notification-workflow-dev-create_lead_product",
+            "Retry": [
+                {
+                    "ErrorEquals": ["CustomError"],
+                    "IntervalSeconds": 1,
+                    "MaxAttempts": 2,
+                    "BackoffRate": 2.0
+                },
+                {
+                    "ErrorEquals": ["States.TaskFailed"],
+                    "IntervalSeconds": 30,
+                    "MaxAttempts": 2,
+                    "BackoffRate": 2.0
+                },
+                {
+                    "ErrorEquals": ["States.ALL"],
+                    "IntervalSeconds": 5,
+                    "MaxAttempts": 5,
+                    "BackoffRate": 2.0
+                }
+            ],
+            "Next": "CreateLeadPrice"
+        }, 
+        "CreateLeadPrice": {
+            "Type": "Task",
+            "Resource": "arn:aws:lambda:us-east-1:906360379090:function:lead-ingestion-notification-workflow-dev-create_lead_price",
+            "Retry": [
+                {
+                    "ErrorEquals": ["CustomError"],
+                    "IntervalSeconds": 1,
+                    "MaxAttempts": 2,
+                    "BackoffRate": 2.0
+                },
+                {
+                    "ErrorEquals": ["States.TaskFailed"],
+                    "IntervalSeconds": 30,
+                    "MaxAttempts": 2,
+                    "BackoffRate": 2.0
+                },
+                {
+                    "ErrorEquals": ["States.ALL"],
+                    "IntervalSeconds": 5,
+                    "MaxAttempts": 5,
+                    "BackoffRate": 2.0
+                }
+            ],
+            "Next": "CreateLeadPL"
+        }, 
+        "CreateLeadPL": {
+            "Type": "Task",
+            "Resource": "arn:aws:lambda:us-east-1:906360379090:function:lead-ingestion-notification-workflow-dev-create_lead_pl",
+            "Retry": [
+                {
+                    "ErrorEquals": ["CustomError"],
+                    "IntervalSeconds": 1,
+                    "MaxAttempts": 2,
+                    "BackoffRate": 2.0
+                },
+                {
+                    "ErrorEquals": ["States.TaskFailed"],
+                    "IntervalSeconds": 30,
+                    "MaxAttempts": 2,
+                    "BackoffRate": 2.0
+                },
+                {
+                    "ErrorEquals": ["States.ALL"],
+                    "IntervalSeconds": 5,
+                    "MaxAttempts": 5,
+                    "BackoffRate": 2.0
+                }
+            ],
+            "Next": "CreateGeocodeAddress"
+        },
+        "CreateGeocodeAddress": {
+            "Type": "Task",
+            "Resource": "arn:aws:lambda:us-east-1:906360379090:function:lead-ingestion-notification-workflow-dev-get_full_address",
+            "Retry": [
+                {
+                    "ErrorEquals": ["CustomError"],
+                    "IntervalSeconds": 1,
+                    "MaxAttempts": 2,
+                    "BackoffRate": 2.0
+                },
+                {
+                    "ErrorEquals": ["States.TaskFailed"],
+                    "IntervalSeconds": 30,
+                    "MaxAttempts": 2,
+                    "BackoffRate": 2.0
+                },
+                {
+                    "ErrorEquals": ["States.ALL"],
+                    "IntervalSeconds": 5,
+                    "MaxAttempts": 5,
+                    "BackoffRate": 2.0
+                }
+            ],
+            "End": true
+        }
+    }
+}

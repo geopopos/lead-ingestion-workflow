@@ -41,3 +41,13 @@ functions:
     handler: src/get_full_address.get_full_address
     environment:
       GOOGLE_API_KEY: ${param:GOOGLE_API_KEY}
+
+stepFunctions:
+  stateMachines:
+    newLeadIngestion:
+      name: new-lead-ingestion-workflow
+      events:
+        - http:
+            path: ingest_lead
+            method: POST
+      definition: ${file(src/workflow.asl.yaml)}
