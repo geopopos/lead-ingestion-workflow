@@ -16,7 +16,6 @@ provider:
     REGION_NAME: ${self:provider.region}
 
 plugins:
-  - serverless-lift
   - serverless-python-requirements
   - serverless-step-functions
 
