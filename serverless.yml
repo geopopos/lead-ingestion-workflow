@@ -22,6 +22,6 @@ plugins:
 functions:
   create_lead_product_stripe:
     handler: src/create_lead_product_stripe.create_lead_product_stripe
-    environment:
-      STRIPE_TEST_API_KEY: ${param:STRIPE_TEST_API_KEY}
-      STRIPE_API_KEY: ${param:STRIPE_API_KEY}
+    # environment:
+    #   STRIPE_TEST_API_KEY: ${param:STRIPE_TEST_API_KEY}
+    #   STRIPE_API_KEY: ${param:STRIPE_API_KEY}
