@@ -20,8 +20,24 @@ plugins:
   - serverless-step-functions
 
 functions:
+  add_lead_dynamo:
+    handler: src/add_lead_to_dynamo.add_lead_to_dynamo
   create_lead_product:
     handler: src/create_lead_product_stripe.create_lead_product_stripe
-    # environment:
-    #   STRIPE_TEST_API_KEY: ${param:STRIPE_TEST_API_KEY}
-    #   STRIPE_API_KEY: ${param:STRIPE_API_KEY}
+    environment:
+      STRIPE_TEST_API_KEY: ${param:STRIPE_TEST_API_KEY}
+      STRIPE_API_KEY: ${param:STRIPE_API_KEY}
+  create_lead_price:
+    handler: src/create_lead_price_stripe.create_lead_price_stripe
+    environment:
+      STRIPE_TEST_API_KEY: ${param:STRIPE_TEST_API_KEY}
+      STRIPE_API_KEY: ${param:STRIPE_API_KEY}
+  create_lead_pl:
+    handler: src/create_payment_link.create_payment_link
+    environment:
+      STRIPE_TEST_API_KEY: ${param:STRIPE_TEST_API_KEY}
+      STRIPE_API_KEY: ${param:STRIPE_API_KEY}
+  get_full_address:
+    handler: src/get_full_address.get_full_address
+    environment:
+      GOOGLE_API_KEY: ${param:GOOGLE_API_KEY}
