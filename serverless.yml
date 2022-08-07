@@ -51,7 +51,7 @@ functions:
     handler: src/get_full_address.get_full_address
     environment:
       GOOGLE_API_KEY: ${param:GOOGLE_API_KEY}
-  lead_notification_spawner:
+  lead_noti_spawner:
     handler: src/lead_notification_spawner.lead_notification_spawner
 
 stepFunctions:
