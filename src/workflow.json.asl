@@ -125,7 +125,33 @@
                     "BackoffRate": 2.0
                 }
             ],
+            "Next": "LeadNotificationSpawner"
+        },
+        "LeadNotificationSpawner": {
+            "Type": "Task",
+            "Resource": "arn:aws:lambda:us-east-1:906360379090:function:lead-ingestion-notification-workflow-dev-lead_noti_spawner",
+            "Retry": [
+                {
+                    "ErrorEquals": ["CustomError"],
+                    "IntervalSeconds": 1,
+                    "MaxAttempts": 2,
+                    "BackoffRate": 2.0
+                },
+                {
+                    "ErrorEquals": ["States.TaskFailed"],
+                    "IntervalSeconds": 30,
+                    "MaxAttempts": 2,
+                    "BackoffRate": 2.0
+                },
+                {
+                    "ErrorEquals": ["States.ALL"],
+                    "IntervalSeconds": 5,
+                    "MaxAttempts": 5,
+                    "BackoffRate": 2.0
+                }
+            ],
             "End": true
         }
+        
     }
 }
