@@ -20,7 +20,7 @@ plugins:
   - serverless-step-functions
 
 functions:
-  create_lead_product_stripe:
+  create_lead_product:
     handler: src/create_lead_product_stripe.create_lead_product_stripe
     # environment:
     #   STRIPE_TEST_API_KEY: ${param:STRIPE_TEST_API_KEY}
