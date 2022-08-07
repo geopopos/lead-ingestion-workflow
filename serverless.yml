@@ -12,7 +12,17 @@ provider:
   profile: serverless-admin
   timeout: 10
   memorySize: 128 
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action: 
+            - sqs:SendMessage
+            - sqs:GetQueueUrl
+            - sqs:ListQueues
+          Resource: "arn:aws:sqs:us-east-1:906360379090:send-new-lead-notification-dev-jobs"
   environment:
+    SQS_QUEUE_URL: https://sqs.us-east-1.amazonaws.com/906360379090/send-new-lead-notification-dev-jobs
     REGION_NAME: ${self:provider.region}
 
 plugins:
@@ -41,6 +51,8 @@ functions:
     handler: src/get_full_address.get_full_address
     environment:
       GOOGLE_API_KEY: ${param:GOOGLE_API_KEY}
+  lead_notification_spawner:
+    handler: src/lead_notification_spawner.lead_notification_spawner
 
 stepFunctions:
   stateMachines:
