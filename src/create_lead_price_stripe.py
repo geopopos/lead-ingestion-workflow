@@ -1,4 +1,3 @@
-from tkinter import W
 import stripe, os, requests, json
 
 from urllib import parse
