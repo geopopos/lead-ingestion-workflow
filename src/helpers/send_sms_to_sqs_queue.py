@@ -1,7 +1,7 @@
 import os, requests, json
 from string import Template
 
-def send_sms_to_sqs_queue(logger, sqs_client, sms_queue_url, event):
+def send_sms_to_sqs_queue(logger, sqs_client, sms_queue_url, event, ppl_api_url):
     # for each record, create a notification
     # for each notification, create a task in sqs
 

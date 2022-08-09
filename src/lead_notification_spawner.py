@@ -18,4 +18,4 @@ def lead_notification_spawner(event, context):
     # for each notification, create a task in sqs
     sms_queue_url = os.environ.get('SQS_SMS_QUEUE_URL')
 
-    return send_sms_to_sqs_queue.send_sms_to_sqs_queue(logger, sqs_client, sms_queue_url, event)
+    return send_sms_to_sqs_queue.send_sms_to_sqs_queue(logger, sqs_client, sms_queue_url, event, ppl_api_url)
