@@ -5,7 +5,7 @@ from urllib import parse
 stripe_api_key = os.environ.get('STRIPE_API_KEY')
 ppl_api_url ="https://e6b1hc9rfg.execute-api.us-east-1.amazonaws.com"
 
-if os.environ.get('IS_LOCAL') == 'true':
+if os.environ.get('IS_LOCAL') == 'true' or os.environ.get('STAGE') == 'dev':
     stripe_api_key = os.environ.get('STRIPE_TEST_API_KEY')
     ppl_api_url = "http://localhost:2000"
 
