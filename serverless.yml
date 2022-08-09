@@ -21,8 +21,15 @@ provider:
             - sqs:GetQueueUrl
             - sqs:ListQueues
           Resource: "arn:aws:sqs:us-east-1:906360379090:send-new-lead-notification-dev-jobs"
+        - Effect: Allow
+          Action:
+            - sqs:SendMessage
+            - sqs:GetQueueUrl
+            - sqs:ListQueues
+          Resource: "arn:aws:sqs:us-east-1:906360379090:send-new-lead-notification-email-dev-jobs"
   environment:
-    SQS_QUEUE_URL: https://sqs.us-east-1.amazonaws.com/906360379090/send-new-lead-notification-dev-jobs
+    SQS_SMS_QUEUE_URL: https://sqs.us-east-1.amazonaws.com/906360379090/send-new-lead-notification-dev-jobs
+    SQS_EMAIL_QUEUE_URL: https://sqs.us-east-1.amazonaws.com/906360379090/send-new-lead-notification-email-dev-jobs
     REGION_NAME: ${self:provider.region}
 
 plugins:
