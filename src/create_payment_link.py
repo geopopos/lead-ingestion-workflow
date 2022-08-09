@@ -9,7 +9,7 @@ if os.environ.get('IS_LOCAL') == 'true':
     stripe_api_key = os.environ.get('STRIPE_TEST_API_KEY')
     ppl_api_url = "http://localhost:2000"
 
-if os.get('STAGE') == 'dev':
+if os.environ.get('STAGE') == 'dev':
     stripe_api_key = os.environ.get('STRIPE_TEST_API_KEY')
 
 def create_payment_link(event, context):
