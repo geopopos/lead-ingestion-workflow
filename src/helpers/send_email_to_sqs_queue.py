@@ -1,17 +1,18 @@
-import os, requests, json
 from string import Template
+import requests, json
 
-def send_sms_to_sqs_queue(logger, sqs_client, sms_queue_url, message_body, roofing_contractor):
+def send_email_to_sqs_queue(logger, sqs_email_client, email_queue_url, message_subject, message_body, roofing_contractor):
     # create notification for sms
     notification = {
         "notification_type": "lead",
+        "message_subject": message_subject,
         "message_body": message_body,
-        "to_number": roofing_contractor.get('Phone')
+        "to_address": roofing_contractor.get('Email')
     }
     # create task in sqs sms
     try:
-        task = sqs_client.send_message(
-            QueueUrl=sms_queue_url, 
+        task = sqs_email_client.send_message(
+            QueueUrl=email_queue_url, 
             MessageBody=json.dumps(notification)
             )
         logger.info(f"task: {task}")
